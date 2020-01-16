@@ -54,7 +54,7 @@ classes for writing your validators and override necessary validation methods. S
 Requires java 1.8.
 
 ## Source code
-The source code is available on GitHub : https://github.com/sylvainlaurent/swagger-validator-maven-plugin
+The source code is available on GitHub : https://github.com/giuliopulina/swagger-validator-maven-plugin
 
 ### How to build source
 Use Maven and a JDK >=8, and run `mvn clean verify` in the root directory of the git repository.
