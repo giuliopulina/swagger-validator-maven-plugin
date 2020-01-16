@@ -34,7 +34,7 @@ public class ModelImplWrapper extends AbstractModelWrapper<ModelImpl> {
         return requiredProperties;
     }
 
-    public List<String> getReadOlyProperties() {
+    public List<String> getReadOnlyProperties() {
         return getProperties().values().stream().filter(VisitableProperty::getReadOnly).map(VisitableProperty::getName)
                 .collect(Collectors.toList());
     }
@@ -95,7 +95,7 @@ public class ModelImplWrapper extends AbstractModelWrapper<ModelImpl> {
         return model.getDefaultValue();
     }
 
-    public List<String> get_enum() {
+    public List<String> getEnum() {
         return model.getEnum();
     }
 
