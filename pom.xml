@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.sylvainlaurent.maven</groupId>
+  <groupId>com.github.giuliopulina</groupId>
   <artifactId>swagger-validator-maven-plugin</artifactId>
-  <version>1.2.7-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>swagger-validator-maven-plugin Maven Plugin</name>
   <description>A Maven Plugin to validate yaml and json swagger document</description>
-  <url>https://github.com/sylvainlaurent/swagger-validator-maven-plugin</url>
+  <url>https://github.com/giuliopulina/swagger-validator-maven-plugin</url>
 
   <licenses>
     <license>
@@ -16,18 +16,11 @@
     </license>
   </licenses>
 
-  <developers>
-    <developer>
-      <name>Sylvain LAURENT</name>
-      <email>slaurent@apache.org</email>
-    </developer>
-  </developers>
-
   <scm>
     <connection>scm:git:https://github.com/sylvainlaurent/swagger-validator-maven-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/sylvainlaurent/swagger-validator-maven-plugin.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/sylvainlaurent/swagger-validator-maven-plugin</url>
+    <url>https://github.com/giuliopulina/swagger-validator-maven-plugin.git</url>
   </scm>
 
   <distributionManagement>
