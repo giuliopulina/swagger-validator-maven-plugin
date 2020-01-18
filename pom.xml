@@ -17,8 +17,8 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:https://github.com/sylvainlaurent/swagger-validator-maven-plugin.git</connection>
-    <developerConnection>scm:git:https://github.com/sylvainlaurent/swagger-validator-maven-plugin.git</developerConnection>
+    <connection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</connection>
+    <developerConnection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/giuliopulina/swagger-validator-maven-plugin.git</url>
   </scm>
