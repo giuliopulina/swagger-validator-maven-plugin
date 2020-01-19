@@ -16,6 +16,12 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>Giulio Pulina</name>
+    </developer>
+  </developers>
+
   <scm>
     <connection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</developerConnection>
