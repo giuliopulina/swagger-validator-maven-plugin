@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sylvainlaurent/swagger-validator-maven-plugin.svg)](https://travis-ci.org/sylvainlaurent/swagger-validator-maven-plugin)
+[![Build Status](https://travis-ci.org/giuliopulina/swagger-validator-maven-plugin.svg)](https://travis-ci.org/giuliopulina/swagger-validator-maven-plugin)
 
 # swagger-validator-maven-plugin
 
@@ -8,7 +8,7 @@ This maven plugin allows to validate yaml and json files.
 
 ```xml
       <plugin>
-        <groupId>com.github.sylvainlaurent.maven</groupId>
+        <groupId>com.github.giuliopulina</groupId>
         <artifactId>swagger-validator-maven-plugin</artifactId>
         <version>...</version>
         <executions>
