@@ -2,6 +2,7 @@ package com.github.sylvainlaurent.maven.swaggervalidator;
 
 import com.github.sylvainlaurent.maven.swaggervalidator.instrumentation.Instrumentation;
 import com.github.sylvainlaurent.maven.swaggervalidator.service.ValidationService;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -79,6 +80,7 @@ public class ValidateMojo extends AbstractMojo {
     }
 
     private File[] getFiles() {
+
         final DirectoryScanner ds = new DirectoryScanner();
         ds.setBasedir(basedir);
         if (includes != null && includes.length > 0) {
@@ -92,7 +94,7 @@ public class ValidateMojo extends AbstractMojo {
         final File[] files = new File[filePaths.length];
 
         for (int i = 0; i < filePaths.length; i++) {
-            files[i] = new File(basedir, filePaths[i]);
+            files[i] = new File(basedir, FilenameUtils.normalize(filePaths[i]));
         }
 
         return files;

@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ValidationService {
 
     private static final String SCHEMA_FILE = "swagger-schema.json";
