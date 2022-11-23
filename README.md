@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/giuliopulina/swagger-validator-maven-plugin.svg)](https://travis-ci.org/giuliopulina/swagger-validator-maven-plugin)
+[![Build Status](https://github.com/giuliopulina/swagger-validator-maven-plugin/actions/workflows/maven.yml/badge.svg)]
 
 # swagger-validator-maven-plugin
 
