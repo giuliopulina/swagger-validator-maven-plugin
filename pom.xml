@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.giuliopulina</groupId>
   <artifactId>swagger-validator-maven-plugin</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.2.6-giuliopulina-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>swagger-validator-maven-plugin Maven Plugin</name>
   <description>A Maven Plugin to validate yaml and json swagger document</description>
@@ -34,6 +34,7 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
+
   </distributionManagement>
 
   <properties>
@@ -205,7 +206,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.2</version>
+        <version>1.6.13</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
