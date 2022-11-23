@@ -8,7 +8,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 import java.io.File;
@@ -17,9 +16,6 @@ import java.util.Collections;
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.PROCESS_SOURCES, threadSafe = true,
         requiresDependencyResolution = ResolutionScope.TEST)
 public class ValidateMojo extends AbstractMojo {
-
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
-    private MavenProject project;
 
     @Parameter(defaultValue = "${project.basedir}", required = true, readonly = true)
     private File basedir;
