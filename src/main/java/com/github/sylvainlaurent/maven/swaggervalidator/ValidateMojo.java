@@ -2,13 +2,13 @@ package com.github.sylvainlaurent.maven.swaggervalidator;
 
 import com.github.sylvainlaurent.maven.swaggervalidator.instrumentation.Instrumentation;
 import com.github.sylvainlaurent.maven.swaggervalidator.service.ValidationService;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.DirectoryScanner;
 
 import java.io.File;
@@ -17,9 +17,6 @@ import java.util.Collections;
 @Mojo(name = "validate", defaultPhase = LifecyclePhase.PROCESS_SOURCES, threadSafe = true,
         requiresDependencyResolution = ResolutionScope.TEST)
 public class ValidateMojo extends AbstractMojo {
-
-    @Parameter(defaultValue = "${project}", required = true, readonly = true)
-    private MavenProject project;
 
     @Parameter(defaultValue = "${project.basedir}", required = true, readonly = true)
     private File basedir;
@@ -83,6 +80,7 @@ public class ValidateMojo extends AbstractMojo {
     }
 
     private File[] getFiles() {
+
         final DirectoryScanner ds = new DirectoryScanner();
         ds.setBasedir(basedir);
         if (includes != null && includes.length > 0) {
@@ -96,7 +94,7 @@ public class ValidateMojo extends AbstractMojo {
         final File[] files = new File[filePaths.length];
 
         for (int i = 0; i < filePaths.length; i++) {
-            files[i] = new File(basedir, filePaths[i]);
+            files[i] = new File(basedir, FilenameUtils.normalize(filePaths[i]));
         }
 
         return files;

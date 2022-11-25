@@ -141,7 +141,7 @@ public class PathWrapper implements PathObject {
         // marker interface
     }
 
-    class PathParam implements PathElement {
+    static class PathParam implements PathElement {
 
         @Override
         public int hashCode() {
@@ -161,7 +161,7 @@ public class PathWrapper implements PathObject {
         }
     }
 
-    class PathToken implements PathElement {
+    static class PathToken implements PathElement {
         String token;
 
         PathToken(String token) {

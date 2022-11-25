@@ -1,14 +1,8 @@
 package com.github.sylvainlaurent.maven.swaggervalidator.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.load.Dereferencing;
-import com.github.fge.jsonschema.core.load.configuration.LoadingConfiguration;
-import com.github.fge.jsonschema.core.report.ProcessingMessage;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.main.JsonSchema;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.github.sylvainlaurent.maven.swaggervalidator.ValidationResult;
 import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.SemanticError;
 import io.swagger.models.Swagger;
@@ -17,6 +11,11 @@ import io.swagger.parser.SwaggerResolver;
 import io.swagger.parser.util.SwaggerDeserializationResult;
 import io.swagger.util.Json;
 import io.swagger.util.Yaml;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,33 +23,28 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ValidationService {
 
     private static final String SCHEMA_FILE = "swagger-schema.json";
 
+    private final Schema schema;
+
     private final ObjectMapper jsonMapper = Json.mapper();
     private final ObjectMapper yamlMapper = Yaml.mapper();
 
-    private JsonSchema schema;
     private String customModelValidatorsPackage;
     private String customPathValidatorsPackage;
     private String[] customMimeTypes;
 
     public ValidationService() {
-        final InputStream is = this.getClass().getClassLoader().getResourceAsStream(SCHEMA_FILE);
-        JsonNode schemaObject;
-        try {
-            schemaObject = jsonMapper.readTree(is);
-            // using INLINE dereferencing to avoid internet access while validating
-            final LoadingConfiguration loadingConfiguration = LoadingConfiguration.newBuilder()
-                    .dereferencing(Dereferencing.INLINE).freeze();
-            final JsonSchemaFactory factory = JsonSchemaFactory.newBuilder()
-                    .setLoadingConfiguration(loadingConfiguration).freeze();
-            schema = factory.getJsonSchema(schemaObject);
-        } catch (IOException | ProcessingException e) {
+
+        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(SCHEMA_FILE)) {
+            JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
+            schema = SchemaLoader.load(rawSchema);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public ValidationResult validate(final File file) {
@@ -82,23 +76,20 @@ public class ValidationService {
     }
 
     private void validateSwagger(final JsonNode spec, final ValidationResult validationResult, final Swagger swagger) {
+
         try {
-            final ProcessingReport report = schema.validate(spec);
-            if (!report.isSuccess()) {
-                validationResult.encounteredError();
-            }
-            for (final ProcessingMessage processingMessage : report) {
-                validationResult.addMessage(processingMessage.toString());
-            }
-        } catch (final ProcessingException e) {
+            schema.validate(new JSONObject(jsonMapper.writeValueAsString(spec)));
+        } catch (ValidationException e) {
             validationResult.addMessage(e.getMessage());
             validationResult.encounteredError();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
 
         List<SemanticError> semanticValidationResult = new SemanticValidationService(swagger,
                 customModelValidatorsPackage, customPathValidatorsPackage, customMimeTypes).validate();
-        if (!semanticValidationResult.isEmpty()){
-            for (SemanticError error: semanticValidationResult) {
+        if (!semanticValidationResult.isEmpty()) {
+            for (SemanticError error : semanticValidationResult) {
                 validationResult.addMessage(error.toString());
             }
             validationResult.encounteredError();
@@ -117,6 +108,7 @@ public class ValidationService {
     public void setCustomModelValidatorsPackage(String customModelValidatorsPackage) {
         this.customModelValidatorsPackage = customModelValidatorsPackage;
     }
+
     public void setCustomPathValidatorsPackage(String customPathValidatorsPackage) {
         this.customPathValidatorsPackage = customPathValidatorsPackage;
     }

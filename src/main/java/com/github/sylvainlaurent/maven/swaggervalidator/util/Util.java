@@ -2,6 +2,7 @@ package com.github.sylvainlaurent.maven.swaggervalidator.util;
 
 import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashSet;
@@ -54,8 +55,8 @@ public class Util {
 
     private static <T> T createInstance(Class<T> clazz) {
         try {
-            return clazz.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return clazz.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new IllegalArgumentException("Cannot instantiate validator " + clazz.getCanonicalName(), e);
         }
     }
