@@ -12,8 +12,12 @@ on:
   push:
     branches:
       - master
+      - 'feature/**'
+      - 'bugfix/**'
     pull_request:
       - master
+      - 'feature/**'
+      - 'bugfix/**'
 jobs:
   build:
     runs-on: ubuntu-latest
