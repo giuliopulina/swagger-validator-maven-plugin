@@ -2,7 +2,7 @@
 
 # swagger-validator-maven-plugin
 
-This maven plugin allows to validate yaml and json files.
+This maven plugin allows to validate Swagger 2.0 yaml and json files.
 
 ## Plugin configuration
 
