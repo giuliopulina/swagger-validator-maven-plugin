@@ -1,21 +1,22 @@
 package com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.path;
 
 import static com.github.sylvainlaurent.maven.swaggervalidator.SemanticValidationServiceTest.readDoc;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 import com.github.sylvainlaurent.maven.swaggervalidator.SemanticValidationServiceTest;
-import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorJunitRunner;
+import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorCodeInstrumentationExtension;
 import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.SemanticError;
 import com.github.sylvainlaurent.maven.swaggervalidator.service.SemanticValidationService;
 import io.swagger.parser.util.SwaggerDeserializationResult;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@RunWith(ValidatorJunitRunner.class)
+@ExtendWith(ValidatorCodeInstrumentationExtension.class)
 public class MediaTypeValidatorTest {
 
     public static final String RESOURCE_FOLDER = "src/test/resources/semantic-validation/";
@@ -36,7 +37,7 @@ public class MediaTypeValidatorTest {
                 RESOURCE_FOLDER + "consumes-and-produces-invalid-MIME-types.yml");
         List<SemanticError> errors = new SemanticValidationService(swaggerResult.getSwagger()).validate();
         logger.info(errors.toString());
-        assertEquals("Should have 3 validation errors",3, errors.size());
+        assertEquals(3, errors.size());
         assertEquals("invalid media type 'application////json' in 'produces'", errors.get(0).getMessage());
         assertEquals("invalid media type 'not_allowed_prefix/application/mytype3' in 'consumes'", errors.get(1).getMessage());
         assertEquals("paths./producs.post", errors.get(1).getPath());

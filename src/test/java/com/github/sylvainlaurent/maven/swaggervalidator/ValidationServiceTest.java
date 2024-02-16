@@ -2,16 +2,14 @@
 package com.github.sylvainlaurent.maven.swaggervalidator;
 
 import com.github.sylvainlaurent.maven.swaggervalidator.service.ValidationService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(ValidatorJunitRunner.class)
+@ExtendWith(ValidatorCodeInstrumentationExtension.class)
 public class ValidationServiceTest {
     private final ValidationService service = new ValidationService();
 

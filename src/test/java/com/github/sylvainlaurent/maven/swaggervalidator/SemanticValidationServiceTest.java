@@ -1,26 +1,22 @@
 package com.github.sylvainlaurent.maven.swaggervalidator;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.DefinitionSemanticError;
+import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.SemanticError;
+import com.github.sylvainlaurent.maven.swaggervalidator.service.SemanticValidationService;
+import io.swagger.parser.Swagger20Parser;
+import io.swagger.parser.util.SwaggerDeserializationResult;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.util.Arrays.asList;
+import static org.junit.jupiter.api.Assertions.*;
 
-import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.DefinitionSemanticError;
-import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.SemanticError;
-import com.github.sylvainlaurent.maven.swaggervalidator.service.SemanticValidationService;
-
-import io.swagger.parser.Swagger20Parser;
-import io.swagger.parser.util.SwaggerDeserializationResult;
-
-@RunWith(ValidatorJunitRunner.class)
+@ExtendWith(ValidatorCodeInstrumentationExtension.class)
 public class SemanticValidationServiceTest {
 
     public static final String RESOURCE_FOLDER = "src/test/resources/semantic-validation/";

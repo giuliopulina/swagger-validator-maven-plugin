@@ -1,11 +1,6 @@
 package com.github.sylvainlaurent.maven.swaggervalidator.util;
 
-import java.util.Set;
-
-import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorJunitRunner;
-import org.junit.Assert;
-import org.junit.Test;
-
+import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorCodeInstrumentationExtension;
 import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.definition.VisitableModelValidator;
 import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.path.SwaggerPathValidator;
 import com.github.sylvainlaurent.maven.swaggervalidator.util.validators.model.ModelValidatorImpl;
@@ -13,9 +8,14 @@ import com.github.sylvainlaurent.maven.swaggervalidator.util.validators.model.Mo
 import com.github.sylvainlaurent.maven.swaggervalidator.util.validators.path.PathValidatorImpl;
 import com.github.sylvainlaurent.maven.swaggervalidator.util.validators.path.PathValidatorTemplateImpl;
 import com.github.sylvainlaurent.maven.swaggervalidator.util.validators.path.SwaggerPathValidatorImpl;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-@RunWith(ValidatorJunitRunner.class)
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(ValidatorCodeInstrumentationExtension.class)
 public class UtilTest {
 
     private static final String MODEL_VALIDATORS_PACKAGE = "com.github.sylvainlaurent.maven.swaggervalidator.util.validators.model";
@@ -29,8 +29,8 @@ public class UtilTest {
         Set<VisitableModelValidator> instances = Util.createInstances(MODEL_VALIDATORS_PACKAGE,
                 MODEL_VALIDATOR_INTERFACE);
 
-        Assert.assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(ModelValidatorImpl.class)));
-        Assert.assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(ModelValidatorTemplateImpl.class)));
+        assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(ModelValidatorImpl.class)));
+        assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(ModelValidatorTemplateImpl.class)));
 
     }
 
@@ -38,9 +38,9 @@ public class UtilTest {
     public void createPathValidatorInstances() throws Exception {
         Set<SwaggerPathValidator> instances = Util.createInstances(PATH_VALIDATORS_PACKAGE, PATH_VALIDATOR_INTERFACE);
 
-        Assert.assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(PathValidatorImpl.class)));
-        Assert.assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(PathValidatorTemplateImpl.class)));
-        Assert.assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(SwaggerPathValidatorImpl.class)));
+        assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(PathValidatorImpl.class)));
+        assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(PathValidatorTemplateImpl.class)));
+        assertTrue(instances.stream().anyMatch(p -> p.getClass().equals(SwaggerPathValidatorImpl.class)));
     }
 
 }

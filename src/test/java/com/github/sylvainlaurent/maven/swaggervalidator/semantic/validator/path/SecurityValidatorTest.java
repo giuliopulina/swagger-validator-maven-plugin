@@ -1,11 +1,11 @@
 package com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.path;
 
-import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorJunitRunner;
+import com.github.sylvainlaurent.maven.swaggervalidator.ValidatorCodeInstrumentationExtension;
 import com.github.sylvainlaurent.maven.swaggervalidator.semantic.validator.error.SemanticError;
 import com.github.sylvainlaurent.maven.swaggervalidator.service.SemanticValidationService;
 import io.swagger.parser.util.SwaggerDeserializationResult;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 import static com.github.sylvainlaurent.maven.swaggervalidator.SemanticValidationServiceTest.RESOURCE_FOLDER;
 import static com.github.sylvainlaurent.maven.swaggervalidator.SemanticValidationServiceTest.readDoc;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(ValidatorJunitRunner.class)
+@ExtendWith(ValidatorCodeInstrumentationExtension.class)
 public class SecurityValidatorTest {
 
     private static Logger logger = LoggerFactory.getLogger(SecurityValidatorTest.class);
