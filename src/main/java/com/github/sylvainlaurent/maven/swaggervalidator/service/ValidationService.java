@@ -40,8 +40,15 @@ public class ValidationService {
     public ValidationService() {
 
         try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(SCHEMA_FILE)) {
+            assert inputStream != null;
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
-            schema = SchemaLoader.load(rawSchema);
+            schema = SchemaLoader
+                    .builder()
+                    .useDefaults(true)
+                    .schemaJson(rawSchema)
+                    .build()
+                    .load()
+                    .build();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
