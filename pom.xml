@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.giuliopulina</groupId>
   <artifactId>swagger-validator-maven-plugin</artifactId>
-  <version>1.2.7-giuliopulina</version>
+  <version>1.2.8-giuliopulina-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>swagger-validator-maven-plugin Maven Plugin</name>
   <description>A Maven Plugin to validate yaml and json swagger document</description>
@@ -25,7 +25,7 @@
   <scm>
     <connection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/giuliopulina/swagger-validator-maven-plugin.git</developerConnection>
-    <tag>1.2.7-giuliopulina</tag>
+    <tag>HEAD</tag>
     <url>https://github.com/giuliopulina/swagger-validator-maven-plugin.git</url>
   </scm>
 
