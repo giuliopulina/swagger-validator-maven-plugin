@@ -1,20 +1,12 @@
 package com.github.sylvainlaurent.maven.swaggervalidator.util;
 
-import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
-
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.net.URL;
+import java.util.*;
 
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.Scanners;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
+import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
 
 public class Util {
 
@@ -48,16 +40,50 @@ public class Util {
     }
 
     private static <T> Set<Class<? extends T>> getClassesFromPackage(String packageName, final Class<T> superClass) {
-        Reflections reflections = new Reflections(
-                new ConfigurationBuilder().setScanners(Scanners.SubTypes, Scanners.Resources)
-                        .setUrls(ClasspathHelper.forPackage(packageName)));
-        return reflections.getSubTypesOf(superClass);
+
+        // Get the package directory
+        String packagePath = packageName.replace('.', '/');
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        Set<Class<? extends T>> subClasses = new HashSet<>();
+        URL resource = classLoader.getResource(packagePath);
+        if (resource != null) {
+            File packageDir = new File(resource.getFile());
+            if (packageDir.exists() && packageDir.isDirectory()) {
+                collectSubClasses(packageDir, packageName, subClasses, superClass);
+            }
+        }
+
+        return subClasses;
     }
 
+    private static <T> void collectSubClasses(File directory, String packageName, Set<Class<? extends T>> subClasses, final Class<T> superClass) {
+        // List all files in the directory
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // Recursive call for subdirectories
+                    collectSubClasses(file, packageName + "." + file.getName(), subClasses, superClass);
+                } else if (file.getName().endsWith(".class")) {
+                    // Add the class name to the list
+                    String className = packageName + '.' + file.getName().substring(0, file.getName().length() - 6);
+                    try {
+                        Class cls = Class.forName(className);
+                        if (superClass.isAssignableFrom(cls)) {
+                            subClasses.add(cls);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
     private static <T> T createInstance(Class<T> clazz) {
         try {
             return clazz.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
             throw new IllegalArgumentException("Cannot instantiate validator " + clazz.getCanonicalName(), e);
         }
     }
