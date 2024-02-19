@@ -10,7 +10,7 @@ This maven plugin allows to validate Swagger 2.0 yaml and json files.
       <plugin>
         <groupId>com.github.giuliopulina</groupId>
         <artifactId>swagger-validator-maven-plugin</artifactId>
-        <version>...</version>
+        <version>1.2.8-giuliopulina</version>
         <executions>
           <execution>
             <id>validate</id>
