@@ -65,4 +65,4 @@ Use Maven and a JDK > 11, and run `mvn clean verify` in the root directory of th
 Then push the commits and tags to github.
 
 ## License
-This software is licensed under the Apache Sotware License version 2.0, see [LICENSE.txt](LICENSE.txt).
+This software is licensed under the Apache Software License version 2.0, see [LICENSE.txt](LICENSE.txt).
