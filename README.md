@@ -51,13 +51,13 @@ Validation failures make the build fail by default. You can change this by setti
 You can add your custom validators and provide plugin with them. Extend from ModelValidatorTemplate or PathValidatorTemplate 
 classes for writing your validators and override necessary validation methods. See ReferenceValidator and PathValidator as examples.
 
-Requires Java 11.
+Requires at least JDK 11, CI test matrix is configured with JDK11, JDK17, JDK21.
 
 ## Source code
 The source code is available on GitHub : https://github.com/giuliopulina/swagger-validator-maven-plugin
 
 ### How to build source
-Use Maven and a JDK > 11, and run `mvn clean verify` in the root directory of the git repository.
+Use Maven >= 3.9.6 and a JDK >=11, and run `mvn clean verify` in the root directory of the git repository.
 
 ### How to create a release
 `mvn release:prepare release:perform` and answer the questions about version number.
