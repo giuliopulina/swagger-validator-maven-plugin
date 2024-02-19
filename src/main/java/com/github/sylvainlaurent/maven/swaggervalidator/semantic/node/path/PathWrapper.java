@@ -21,10 +21,10 @@ public class PathWrapper implements PathObject {
 
     private static final Pattern PATTERN = Pattern.compile("\\{((\\w+)?)\\}");
     private final String name;
-    private Path path;
-    private Map<String, OperationWrapper> operations = new HashMap<>();
-    private List<VisitableParameter<Parameter>> parameters = new ArrayList<>();
-    private List<String> requiredPathParameters = new ArrayList<>();
+    private final Path path;
+    private final Map<String, OperationWrapper> operations = new HashMap<>();
+    private final List<VisitableParameter<Parameter>> parameters = new ArrayList<>();
+    private final List<String> requiredPathParameters = new ArrayList<>();
 
     public PathWrapper(String name, Path path) {
         this.pathElements = tokenize(name);
@@ -200,7 +200,7 @@ public class PathWrapper implements PathObject {
             result = result.substring(0, inpath.length() - 1);
         }
 
-        List<String> tokens = asList(result.split(SLASH));
+        String[] tokens = result.split(SLASH);
         for (String token : tokens) {
             if (token.startsWith("{")) {
                 pathPathElements.add(new PathParam());

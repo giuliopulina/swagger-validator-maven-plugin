@@ -12,9 +12,9 @@ import io.swagger.models.properties.Property;
 
 public class ResponseWrapper implements PathObject {
 
-    private Response response;
-    private Map<String, VisitableProperty<? extends Property>> headers = new HashMap<>();
-    private String objectPath;
+    private final Response response;
+    private final Map<String, VisitableProperty<? extends Property>> headers = new HashMap<>();
+    private final String objectPath;
 
     public ResponseWrapper(String operationType, Response response) {
         this.objectPath = operationType;
@@ -37,7 +37,7 @@ public class ResponseWrapper implements PathObject {
     }
 
     public VisitableProperty<? extends Property> getSchema() {
-        return response.getSchema() == null ? null
+        return response.getResponseSchema() == null ? null
                 : VisitablePropertyFactory.createVisitableProperty("schema", response.getSchema());
     }
 

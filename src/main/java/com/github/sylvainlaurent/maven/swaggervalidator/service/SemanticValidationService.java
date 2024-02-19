@@ -32,7 +32,7 @@ import io.swagger.models.Swagger;
 
 public class SemanticValidationService {
 
-    private ValidationContext context;
+    private final ValidationContext context;
 
     private final Set<SwaggerValidator> validators = new HashSet<>();
     private final Set<VisitableModelValidator> modelValidators = new HashSet<>();
@@ -64,13 +64,11 @@ public class SemanticValidationService {
 
     public List<SemanticError> validate() {
 
-        Set<SemanticError> uniqueValidationErrors = new HashSet<>();
-
         MediaTypeValidator mediaTypeValidator = new MediaTypeValidator();
         mediaTypeValidator.setValidationContext(context);
         mediaTypeValidator.validateMediaTypes(new OperationWrapper("swagger-root", new Operation().consumes(context.getSwagger().getConsumes())
                 .produces(context.getSwagger().getProduces()), null));
-        uniqueValidationErrors.addAll(mediaTypeValidator.getErrors());
+        Set<SemanticError> uniqueValidationErrors = new HashSet<>(mediaTypeValidator.getErrors());
 
         for (SwaggerValidator validator : validators) {
             validator.setValidationContext(context);

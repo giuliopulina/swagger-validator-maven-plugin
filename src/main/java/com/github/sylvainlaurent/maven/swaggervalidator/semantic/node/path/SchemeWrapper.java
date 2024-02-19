@@ -5,7 +5,7 @@ import io.swagger.models.Scheme;
 
 public class SchemeWrapper implements PathObject {
 
-    private Scheme scheme;
+    private final Scheme scheme;
 
     public SchemeWrapper(Scheme scheme) {
         this.scheme = scheme;

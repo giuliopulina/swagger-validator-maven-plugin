@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -48,7 +49,7 @@ public class Util {
 
     private static <T> Set<Class<? extends T>> getClassesFromPackage(String packageName, final Class<T> superClass) {
         Reflections reflections = new Reflections(
-                new ConfigurationBuilder().setScanners(new SubTypesScanner(false), new ResourcesScanner())
+                new ConfigurationBuilder().setScanners(Scanners.SubTypes, Scanners.Resources)
                         .setUrls(ClasspathHelper.forPackage(packageName)));
         return reflections.getSubTypesOf(superClass);
     }

@@ -20,20 +20,19 @@ public class OperationWrapper implements PathObject {
 
     private final String name;
     private final PathWrapper path;
-    private Operation operation;
-
-    private Map<String, Object> vendorExtensions = new LinkedHashMap<>();
-    private List<String> tags = new ArrayList<>();
-    private String summary;
-    private String description;
-    private String operationId;
+    private final Operation operation;
+    private final Map<String, Object> vendorExtensions = new LinkedHashMap<>();
+    private final List<String> tags = new ArrayList<>();
+    private final String summary;
+    private final String description;
+    private final String operationId;
     private List<String> consumes;
     private List<String> produces;
-    private List<SchemeWrapper> schemes = new ArrayList<>();
-    private List<Map<String, List<String>>> security = new ArrayList<>();
-    private Boolean deprecated;
-    private List<VisitableParameter<Parameter>> parameters = new ArrayList<>();
-    private List<ResponseWrapper> responses = new ArrayList<>();
+    private final List<SchemeWrapper> schemes = new ArrayList<>();
+    private final List<Map<String, List<String>>> security = new ArrayList<>();
+    private final Boolean deprecated;
+    private final List<VisitableParameter<Parameter>> parameters = new ArrayList<>();
+    private final List<ResponseWrapper> responses = new ArrayList<>();
 
     public OperationWrapper(String name, Operation operation, PathWrapper path) {
         this.name = name;
