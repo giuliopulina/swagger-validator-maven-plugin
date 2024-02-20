@@ -37,6 +37,10 @@
 
   </distributionManagement>
 
+  <prerequisites>
+    <maven>3.9.6</maven>
+  </prerequisites>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <swagger-parser-version>1.0.69</swagger-parser-version>
@@ -102,7 +106,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.10.1</version>
+      <version>5.10.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
