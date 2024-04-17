@@ -126,8 +126,8 @@ public class InheritanceChainPropertiesValidator extends ModelValidatorTemplate 
     }
 
     final class AllPropertiesCollector extends ModelValidatorTemplate {
-        private List<String> properties = new ArrayList<>();
-        private List<String> requiredProperties = new ArrayList<>();
+        private final List<String> properties = new ArrayList<>();
+        private final List<String> requiredProperties = new ArrayList<>();
 
         AllPropertiesCollector(VisitableModel root) {
             root.accept(this);
